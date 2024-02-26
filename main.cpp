@@ -9,7 +9,6 @@ ll i,j,x,y,end_row,end_colum,cng,l,fl,Delay_Time=20,res=-1,Gameover=0;
 ll mxcx=625,mxcy=415,mncy,mncx,stx,sty,tx=1,control=2,lix=615,liy=405,obx=190,oby=30;
 
 map<pair<ll,ll>,ll>mp;
-vector<pair<ll,ll>>lt;
 vector<pair<pair<ll,ll>,pair<ll,ll>>>a=
 {
     {{500,600},{390,420}},{{530,570},{170,390}},{{600,600},{360,80}},{{600,630},{360,360}},{{600,550},{130,230}}
@@ -35,7 +34,6 @@ void Obstacle()
     if(mxcx>=obx&&obx>=mncx&&mxcy>=oby&&oby>=mncy)
     {
         control--;
-        Display();
         t1=obx;
         t2=oby;
         setcolor(BLACK);
@@ -43,6 +41,7 @@ void Obstacle()
         circle(t1,t2,rr-2);
         circle(t1,t2,rr-4);
         circle(t1,t2,rr-6);
+        Display();
         while(true)
         {
             int tr=1;
@@ -85,8 +84,7 @@ int main()
     int gd,gm;
     detectgraph(&gd,&gm);
     initgraph(&gd,&gm,"c:\\TURBOC3\\BGI");
-    for(i=20; i<=140; i+=30)
-        lt.push_back({i,40});
+
     {
         Display();
         Outline();
@@ -103,30 +101,6 @@ int main()
 // Display Start ---------------------------------------------------------------------------------------------------------------
 void Display()
 {
-    {
-        setcolor(GREEN);
-        setfillstyle(SOLID_FILL,BLACK);
-        rectangle(5,25,170,60);
-        floodfill(6,25,GREEN);
-        setcolor(BLACK);
-        rectangle(5,25,170,60);
-        if(control==0)
-            Gameover=1;
-        int r=8,t1,t2;
-        setcolor(RED);
-        for(int l=0; l<control; l++)
-        {
-            t1=lt[l].fi;
-            t2=lt[l].sc;
-            setfillstyle(SOLID_FILL,RED);
-            circle(t1,t2,r);
-            floodfill(t1,t2,RED);
-            circle(t1+r+2,t2,r);
-            floodfill(t1+r+2,t2,RED);
-            circle(t1+r/2+1,t2+r/2+1,r);
-            floodfill(t1,t2+r,RED);
-        }
-    }
     settextstyle(4,4,3);
     setcolor(LIGHTMAGENTA);
     outtextxy(120,25,"LIFE");
@@ -143,6 +117,16 @@ void Display()
     settextstyle(4,4,3);
     setcolor(LIGHTCYAN);
     outtextxy(110,155,s);
+
+    temp=to_string(control);
+    char st[2]="0";
+    st[0]=temp[0];
+    settextstyle(4,4,3);
+    setcolor(LIGHTCYAN);
+    outtextxy(90,55,st);
+    if(control==0)
+        Disgameover();
+
 }
 // Display end -----------------------------------------------------------------------------------------------------------------
 // Character Start -------------------------------------------------------------------------------------------------------------
