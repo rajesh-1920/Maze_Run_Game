@@ -1,4 +1,5 @@
 //Author : Rajesh Biswas
+//Game : Maze Run
 
 #include <bits/stdc++.h>
 #include<graphics.h>
@@ -24,12 +25,107 @@ vector<pair<pair<ll,ll>,pair<ll,ll>>>a=
 };
 void Disgameover();/*DONE*/
 void Character();/*DONE*/
-void Getlife();/*DONE*/
+void Obstacle();/*DONE*/
 void Outline();/*DONE*/
+void Getlife();/*DONE*/
 void Ball();/*DONE*/
 void Display();
-void Obstacle();
 
+// Main function ---------------------------------------------------------------------------------------------------------------
+int main()
+{
+    int gd,gm;
+    detectgraph(&gd,&gm);
+    initgraph(&gd,&gm,"c:\\TURBOC3\\BGI");
+    {
+        Display();
+        Outline();
+        Ball();
+        Getlife();
+        Obstacle();
+        Character();
+    }
+    getch();
+    return 0;
+}
+// End main() ------------------------------------------------------------------------------------------------------------------
+// Display Start ---------------------------------------------------------------------------------------------------------------
+void Display()
+{
+    settextstyle(4,4,3);
+    setcolor(LIGHTMAGENTA);
+    outtextxy(120,35,"LIFE");
+    settextstyle(4,4,2);
+    setcolor(MAGENTA);
+    outtextxy(140,115,"SCORE");
+    string temp=to_string(res);
+    char s[4]="000";
+    l=2;
+    for(int k=0; k<temp.size(); k++)
+        s[l--]=temp[k];
+    settextstyle(4,4,3);
+    setcolor(LIGHTCYAN);
+    outtextxy(110,155,s);
+    temp=to_string(control);
+    char st[2]="0";
+    st[0]=temp[0];
+    settextstyle(4,4,3);
+    setcolor(LIGHTCYAN);
+    outtextxy(90,60,st);
+    if(control==0)
+        Disgameover();
+
+    setcolor(CYAN);
+    settextstyle(4,4,2);
+    outtextxy(125,230,"---------");
+    outtextxy(115,220,"Hints");
+    int rr=8;
+    int t1=40;
+    int t2=250;
+    setcolor(YELLOW);
+    outtextxy(t1+85,t2+10,": You");
+    circle(t1,t2,rr);
+    line(t1-rr,t2-rr,t1+rr,t2+rr);//(\)
+    line(t1-rr,t2+rr,t1+rr,t2-rr);//(/)
+    line(t1,t2+rr,t1,t2-rr);
+    line(t1+rr,t2,t1-rr,t2);
+    rr=8;
+    t1=30;
+    t2=277;
+    setcolor(LIGHTMAGENTA);
+    circle(t1,t2,rr);
+    circle(t1,t2,rr-2);
+    circle(t1,t2,rr-4);
+    circle(t1,t2,rr-6);
+    settextstyle(4,4,1);
+    setcolor(LIGHTRED);
+    outtextxy(140,285,": Life -1");
+    t1=20;
+    t2=302;
+    outtextxy(150,315,": Life +1");
+    setcolor(RED);
+    setfillstyle(SOLID_FILL,RED);
+    circle(t1,t2,rr);
+    floodfill(t1,t2,RED);
+    circle(t1+rr+2,t2,rr);
+    floodfill(t1+rr+2,t2,RED);
+    circle(t1+rr/2+1,t2+rr/2+1,rr);
+    floodfill(t1,t2+rr,RED);
+    setcolor(LIGHTCYAN);
+    settextstyle(4,4,1);
+    outtextxy(160,340,": Score+1");
+    t1=20;
+    t2=330;
+    setcolor(LIGHTCYAN);
+    setfillstyle(XHATCH_FILL,LIGHTCYAN);
+    circle(t1,t2,10);
+    floodfill(t1,t2,LIGHTCYAN);
+    setcolor(6);
+    outtextxy(160,380,"if (Life==0)");
+    outtextxy(165,402,"Game Over");
+}
+// Display end -----------------------------------------------------------------------------------------------------------------
+// Obstacle start -----------------------------------------------------------------------------------------------------------------
 void Obstacle()
 {
     int t1,t2,rr=8;
@@ -77,60 +173,7 @@ void Obstacle()
         circle(t1,t2,rr-6);
     }
 }
-
-
-
-// Main function ---------------------------------------------------------------------------------------------------------------
-int main()
-{
-    int gd,gm;
-    detectgraph(&gd,&gm);
-    initgraph(&gd,&gm,"c:\\TURBOC3\\BGI");
-
-    {
-        Display();
-        Outline();
-        Ball();
-        Getlife();
-        Obstacle();
-        Character();
-    }
-
-    getch();
-    return 0;
-}
-// End main() ------------------------------------------------------------------------------------------------------------------
-// Display Start ---------------------------------------------------------------------------------------------------------------
-void Display()
-{
-    settextstyle(4,4,3);
-    setcolor(LIGHTMAGENTA);
-    outtextxy(120,25,"LIFE");
-
-    settextstyle(4,4,2);
-    setcolor(MAGENTA);
-    outtextxy(140,115,"SCORE");
-
-    string temp=to_string(res);
-    char s[4]="000";
-    l=2;
-    for(int k=0; k<temp.size(); k++)
-        s[l--]=temp[k];
-    settextstyle(4,4,3);
-    setcolor(LIGHTCYAN);
-    outtextxy(110,155,s);
-
-    temp=to_string(control);
-    char st[2]="0";
-    st[0]=temp[0];
-    settextstyle(4,4,3);
-    setcolor(LIGHTCYAN);
-    outtextxy(90,55,st);
-    if(control==0)
-        Disgameover();
-
-}
-// Display end -----------------------------------------------------------------------------------------------------------------
+// Obstacle end -----------------------------------------------------------------------------------------------------------------
 // Character Start -------------------------------------------------------------------------------------------------------------
 void Character()
 {
