@@ -61,6 +61,7 @@ void Display()
     string temp=to_string(res);
     char s[4]="000";
     l=2;
+    reverse(temp.begin(),temp.end());
     for(int k=0; k<temp.size(); k++)
         s[l--]=temp[k];
     settextstyle(4,4,3);
@@ -204,7 +205,7 @@ void Character()
         }
         else
         {
-            //Display();
+            //Outline();
             delay(Delay_Time);
             fl=1;
             int t=1;
