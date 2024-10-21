@@ -205,7 +205,6 @@ void Character()
         }
         else
         {
-            //Outline();
             delay(Delay_Time);
             fl=1;
             int t=1;
